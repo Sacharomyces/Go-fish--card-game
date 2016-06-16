@@ -28,6 +28,31 @@ namespace Zadanie_str_390__Go_Fish__
                 return Grade.ToString() +" "+ Type.ToString();
             }
         }
+        private static string[] names0 = new string[]
+            {"","dwójek","trójek","czwórek","piątek","szóstek","siódemek","ósemek",
+                "dziewiątek","dziesiątek","waletów","dam","króli","asów"};
+        private static string[] names1 = new string[]
+            {"","dwójkę","trójkę","czwórkę","piątkę","szóstkę","siódemkę","ósemkę",
+                "dziewiątkę","dziesiątkę","waleta","damę","króla","asa" };
+        private static string[] names2AndMore = new string[]
+            {"", "dwójki","trójki","czwórki","piątki","szóstki","siódemki","ósemki",
+                "dziewiątki","dziesiątki","walety","damy","króle","asy" };
+
+        public static string Plural(cardGrade grade, int count)
+        {
+            if (count == 0)
+                return names0[(int)grade];
+            if (count == 1)
+                return names1[(int)grade];
+            else
+                return names2AndMore[(int)grade];
+
+        }
+
+
+
+
+        }
     }
    enum cardGrade
     {
