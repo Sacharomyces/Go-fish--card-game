@@ -11,13 +11,19 @@ namespace Zadanie_str_390__Go_Fish__
         
         private List<Card> cards;
         private Random random = new Random();
+
+        public Deck ()
+        {
+            cards = new List<Card>();
+            
+        }
         public Deck(CardCompearer comparer)
         {
             cards = new List<Card>();
 
             for (int type = 0; type <= 3; type++)
-                for (int value = 1; value <= 13; value++)
-                    cards.Add(new Card((cardGrade)value, (cardType)type));
+                for (int grade = 1; grade <= 13; grade++)
+                    cards.Add(new Card((cardGrade)grade, (cardType)type));
 
             cards.Sort(comparer);
         }
@@ -42,9 +48,10 @@ namespace Zadanie_str_390__Go_Fish__
             return cards[cardNumber];
         }
 
-        public void Remove()
+        public Card  Remove()
         {
-            Remove (cards[0]);       
+
+            return cards[0];    
         }
 
         public void Add (Card cardToAdd)
@@ -67,9 +74,9 @@ namespace Zadanie_str_390__Go_Fish__
                return false;
         }
 
-        public Deck PullOutGrades(CardCompearer comparer, cardGrade grade)
+        public Deck PullOutGrades( cardGrade grade)
         {
-            Deck deckToReturn = new Deck(comparer);
+            Deck deckToReturn = new Deck();
             for (int i = cards.Count - 1; i >= 0; i--)
 
                 if (cards[i].Grade == grade)

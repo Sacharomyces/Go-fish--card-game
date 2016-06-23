@@ -15,36 +15,76 @@ namespace Zadanie_str_390__Go_Fish__
         private Deck cards;
         private TextBox textBoxOnForm;
         public int CardCount { get { return cards.Count; } }
-        public IEnumerable<string> GetCardNames()
-        { return cards.GetCardNames(); }
+        public IEnumerable<string> GetCardNames() { return cards.ToString() }
+        public void SortHand() { cards.SortByGrade(); }
+
+        public Player(String name, Random random, TextBox textBoxOnForm)
+        {
+            this.name = name;
+            this.random = random;
+            this.textBoxOnForm = textBoxOnForm;
+            textBoxOnForm.Text += "" + Name + " has joined the game\r\n";
+            this.cards = new Deck();
+
+
+        }
+        
+        
 
         public Card Peek (int cardNumber) { return cards.Peek(cardNumber); }
-        public void SortHand() { cards.SortByGrade(); }
-        public Player (String name, Random random, TextBox textBoxOnForm)
-        {
+        
+        
 
-        }
-
-        public IEnumerable<cardGrade> PullOutGroups()
-        {
-
-        }
+      
 
         public cardGrade GetRandomGrade()
         {
+            Card randomCard = cards.Peek(random.Next(cards.Count));
+            return randomCard.Grade; 
+            
 
         }
 
         public Deck DoYouHaveAny(cardGrade grade)
         {
+            Deck cardsToReturn = new Deck();
+            cardsToReturn = cards.PullOutGrades(grade);
+            return cardsToReturn;
+            this.textBoxOnForm.Text += Name + " ma " + cardsToReturn.Count + " " + Card.Plural(grade, cardsToReturn.Count) + Environment.NewLine; 
 
         }
 
-        public void AskForACard (List<Player> players, int myIndex, Deck stock, cardGrade grade )
+        public void AskForACard(List<Player> players, int myIndex, Deck stock)
         {
-            // dwie overloaded metody, pierwsza wykonywan gdy przeciwnik pyta wtedy 
-           // sprawdza jego reke w celu wybrania karty i spytania o nia
-           //druga używana przez gracza po wygraniu karty
+            if (stock.Count > 0)
+            {
+                if (cards.Count == 0)
+                    cards.Add(stock.Remove());
+                
+                    cardGrade randomGrade = GetRandomGrade();
+                    AskForACard(players, myIndex, stock, randomGrade);
+                
+            }
+        }
+
+        public void AskForACard (List<Player> players, int myIndex, Deck stock, cardGrade grade)
+        {
+            textBoxOnForm.Text += "" + Name + " pyta czy ktoś ma " + Card.Plural(grade, 2);
+            int totalCardsGiven = 0;
+            for (int playerIndex = players.Count - 1; playerIndex <= 0; playerIndex--)
+            {
+                if (playerIndex != myIndex)
+                {
+                    Player player = players[playerIndex];
+                    Deck cardsToGive = player.DoYouHaveAny(grade);
+                    totalCardsGiven += cardsToGive.Count;
+                }
+                if (totalCardsGiven == 0 && stock.Count > 0)
+                {
+                    textBoxOnForm.Text += Name + " musi dobrać kartę " + Environment.NewLine;
+                    cards.Add(stock.Remove());
+                }
+            }
         }
 
         public IEnumerable<cardGrade> PullOutGroups()
