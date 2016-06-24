@@ -104,5 +104,14 @@ namespace Zadanie_str_390__Go_Fish__
         {
             cards.Sort(new CardCompearer());
         }
+        
+        public IEnumerable<string> GetCardsNames()
+        {
+            string[] CardNames = new string[cards.Count];
+            for (int i = 0; i < cards.Count; i++)
+                CardNames[i] = cards[i].Name;
+            return CardNames;
+                
+        }
     }
 }

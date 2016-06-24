@@ -15,8 +15,9 @@ namespace Zadanie_str_390__Go_Fish__
         private Deck cards;
         private TextBox textBoxOnForm;
         public int CardCount { get { return cards.Count; } }
-        public IEnumerable<string> GetCardNames() { return cards.ToString() }
+        public IEnumerable<string> GetCardNames() { return cards.GetCardsNames(); }
         public void SortHand() { cards.SortByGrade(); }
+        public void TakeCard(Card card) => cards.Add(card); 
 
         public Player(String name, Random random, TextBox textBoxOnForm)
         {
