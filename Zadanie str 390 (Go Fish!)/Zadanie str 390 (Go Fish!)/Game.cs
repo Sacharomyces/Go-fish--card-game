@@ -12,14 +12,15 @@ namespace Zadanie_str_390__Go_Fish__
         private List<Player> players;
         private Deck stock;
         private Dictionary<cardGrade, Player> groups;
-        private TextBox texBoxOnForm;
+        private TextBox textBoxOnForm;
 
         public Game(string playerName, IEnumerable<string> opponentNames, TextBox texBoxOnForm )
 
         {
             Random random = new Random();
-            this.texBoxOnForm = texBoxOnForm;
+            this.textBoxOnForm = texBoxOnForm;
             players = new List<Player>();
+            players.Add(new Player(playerName, random, texBoxOnForm));
             foreach (string player in opponentNames)
                 players.Add(new Player(player, random, texBoxOnForm));
             groups = new Dictionary<cardGrade, Player>();
@@ -38,7 +39,8 @@ namespace Zadanie_str_390__Go_Fish__
                 for (int i = 0; i < 5; i++)
                     player.TakeCard(stock.Remove());
             foreach (Player player in players)
-                player.PullOutGroups();
+                PullOutGroups(player);
+                    
         }
         
         public bool PlayOneRound (int selecterdPlayerCard)
@@ -51,11 +53,69 @@ namespace Zadanie_str_390__Go_Fish__
                     player.AskForACard(players, 0, stock, cardToAsk);
                 else
                     player.AskForACard(players, playersIndex, stock);
+                if (PullOutGroups(players[playersIndex]))
+                {
+                    textBoxOnForm.Text += "" + players[playersIndex].Name + " dobiera rekę" + Environment.NewLine;
+                    for (int i = 0; i < 4 && stock.Count > 0; i++)
+                        players[playersIndex].TakeCard(stock.Remove());
 
+                }
+            }
+            players[0].SortHand();
+            if (stock.Count == 0)
+            {
+                textBoxOnForm.Text += "Koniec kart. Gra Skończona" + Environment.NewLine;
+                return true;
+            }
+            else
+                return false;
+        }
+        public bool PullOutGroups(Player player)
+        {
+            IEnumerable<cardGrade> groupsPulled = player.PullOutGroups();
+            foreach (cardGrade Grade in groupsPulled)
 
+                groups.Add(Grade, player);
+            if (player.CardCount == 0)
+                return true;
+            else
+                return false;
+        }
 
+        public string DescribeGroups()
+        {
+            string describedGroups = "";
+            foreach (Player player in players)
+            {
+
+                foreach (cardGrade grade in groups.Keys)
+                    describedGroups += player.Name + " ma grupę " + Card.Plural(grade, 2) + Environment.NewLine;
+                return describedGroups;
             }
         }
+
+        public string GetWinnerName()
+        {
+            Dictionary<string, int> winners = new Dictionary<string, int>();
+
+            foreach (Player player in players)
+                winners.Add(player.Name, 0);
+
+            foreach (cardGrade grade in groups.Keys)
+            {
+                string name = groups[grade].Name;
+                winners[name] += 1;
+
+            }
+
+        }
+
+                               
+              
+
+
+            
+                
 
     }
 }
