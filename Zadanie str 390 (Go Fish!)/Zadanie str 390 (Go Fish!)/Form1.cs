@@ -36,10 +36,10 @@ namespace Zadanie_str_390__Go_Fish__
         private void UpdateForm()
         {
             listHand.Items.Clear();
-            foreach (String cardName in game.GetPlayerCardNames)
+            foreach (string cardName in game.GetPlayerCardNames())
                 listHand.Items.Add(cardName);
             textGroups.Text = game.DescribeGroups();
-            textProgress.Text += game.DescribePlayerHands();
+            textProgress.Text += game.DescribePlayersHands();
             textProgress.SelectionStart = textProgress.Text.Length;
             textProgress.ScrollToCaret();
         }

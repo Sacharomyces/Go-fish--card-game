@@ -51,7 +51,7 @@ namespace Zadanie_str_390__Go_Fish__
             Deck cardsToReturn = new Deck();
             cardsToReturn = cards.PullOutGrades(grade);
             return cardsToReturn;
-            this.textBoxOnForm.Text += Name + " ma " + cardsToReturn.Count + " " + Card.Plural(grade, cardsToReturn.Count) + Environment.NewLine; 
+            textBoxOnForm.Text += Name + " ma " + cardsToReturn.Count + " " + Card.Plural(grade, cardsToReturn.Count) + Environment.NewLine; 
 
         }
 

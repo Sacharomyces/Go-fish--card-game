@@ -62,5 +62,5 @@ namespace Zadanie_str_390__Go_Fish__
     {
         Karo,Pik,Kier,Trefl
     } 
-}
+
 

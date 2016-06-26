@@ -14,7 +14,7 @@ namespace Zadanie_str_390__Go_Fish__
         private Dictionary<cardGrade, Player> groups;
         private TextBox textBoxOnForm;
 
-        public Game(string playerName, IEnumerable<string> opponentNames, TextBox texBoxOnForm )
+        public Game(string playerName, IEnumerable<string> opponentNames, TextBox texBoxOnForm)
 
         {
             Random random = new Random();
@@ -28,7 +28,7 @@ namespace Zadanie_str_390__Go_Fish__
             Deal();
             players[0].SortHand();
         }
-       
+
         private void Deal()
         {
             for (int type = 0; type <= 3; type++)
@@ -40,10 +40,10 @@ namespace Zadanie_str_390__Go_Fish__
                     player.TakeCard(stock.Remove());
             foreach (Player player in players)
                 PullOutGroups(player);
-                    
+
         }
-        
-        public bool PlayOneRound (int selecterdPlayerCard)
+
+        public bool PlayOneRound(int selecterdPlayerCard)
         {
             cardGrade cardToAsk = players[0].Peek(selecterdPlayerCard).Grade;
             foreach (Player player in players)
@@ -90,8 +90,9 @@ namespace Zadanie_str_390__Go_Fish__
 
                 foreach (cardGrade grade in groups.Keys)
                     describedGroups += player.Name + " ma grupę " + Card.Plural(grade, 2) + Environment.NewLine;
-                return describedGroups;
             }
+            return describedGroups;
+
         }
 
         public string GetWinnerName()
@@ -106,16 +107,55 @@ namespace Zadanie_str_390__Go_Fish__
                 string name = groups[grade].Name;
                 winners[name] += 1;
 
+
             }
+            int mostGroups = 0;
+            string winnerList = "";
+            bool tie = false;
+            foreach (int groups in winners.Values)
+                if (mostGroups < groups)
+                    mostGroups = groups;
+            foreach (string name in winners.Keys)
+                if (winners[name] == mostGroups)
+                {
+                    if (!String.IsNullOrEmpty(winnerList))
+                    {
+                        winnerList += " i ";
+                        tie = true;
+                    }
+                    winnerList += name;
+                }
+            winnerList += " mając " + mostGroups + " grupy";
+            if (tie == true)
+                return "Remis, wygrywają ";
+            else
+                return "Wygrywa ";
+        }
+        public IEnumerable<string> GetPlayerCardNames() => players[0].GetCardNames();
+
+        public string DescribePlayersHands()
+        {
+            string description = "";
+            for (int i = 0; i < players.Count; i++)
+            {
+                description += players[i].Name + " ma " + players[i].CardCount;
+                if (players[i].CardCount == 1)
+                    description += " kartę. " + Environment.NewLine;
+                else
+                    description += " karty. " + Environment.NewLine;
+            }
+            if (stock.Count > 1)
+                description += " W talii zostały " + stock.Count + " karty. ";
+            else if (stock.Count == 1)
+                description += " W talii została jedna karta.";
+            else
+                description += "W talii nie ma juz kart.";
+            return description;
+
+
+
+
 
         }
-
-                               
-              
-
-
-            
-                
-
     }
 }
