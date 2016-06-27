@@ -24,7 +24,7 @@ namespace Zadanie_str_390__Go_Fish__
             this.name = name;
             this.random = random;
             this.textBoxOnForm = textBoxOnForm;
-            textBoxOnForm.Text += "" + Name + " has joined the game\r\n";
+            textBoxOnForm.Text += "" + Name + " dołączył do gry."+Environment.NewLine ;
             this.cards = new Deck();
 
 
@@ -70,7 +70,7 @@ namespace Zadanie_str_390__Go_Fish__
 
         public void AskForACard (List<Player> players, int myIndex, Deck stock, cardGrade grade)
         {
-            textBoxOnForm.Text += "" + Name + " pyta czy ktoś ma " + Card.Plural(grade, 2);
+            textBoxOnForm.Text += "" + Name + " pyta czy ktoś ma " + Card.Plural(grade, 2)+Environment.NewLine;
             int totalCardsGiven = 0;
             for (int playerIndex = players.Count - 1; playerIndex <= 0; playerIndex--)
             {

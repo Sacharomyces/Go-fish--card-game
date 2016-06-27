@@ -48,10 +48,12 @@ namespace Zadanie_str_390__Go_Fish__
             return cards[cardNumber];
         }
 
-        public Card  Remove()
+        public Card  Remove(int i = 0)
         {
+            Card cardToRemove = cards[i];
+            cards.RemoveAt(i);
 
-            return cards[0];    
+            return cardToRemove;  
         }
 
         public void Add (Card cardToAdd)

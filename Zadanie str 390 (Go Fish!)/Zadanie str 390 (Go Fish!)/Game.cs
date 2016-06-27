@@ -9,6 +9,7 @@ namespace Zadanie_str_390__Go_Fish__
 {
     class Game
     {
+        Random random = new Random();
         private List<Player> players;
         private Deck stock;
         private Dictionary<cardGrade, Player> groups;
@@ -17,6 +18,7 @@ namespace Zadanie_str_390__Go_Fish__
         public Game(string playerName, IEnumerable<string> opponentNames, TextBox texBoxOnForm)
 
         {
+            CardCompearer comparer = new CardCompearer();
             Random random = new Random();
             this.textBoxOnForm = texBoxOnForm;
             players = new List<Player>();
@@ -24,24 +26,22 @@ namespace Zadanie_str_390__Go_Fish__
             foreach (string player in opponentNames)
                 players.Add(new Player(player, random, texBoxOnForm));
             groups = new Dictionary<cardGrade, Player>();
-            stock = new Deck();
+            stock = new Deck(comparer);
             Deal();
             players[0].SortHand();
         }
 
         private void Deal()
         {
-            for (int type = 0; type <= 3; type++)
-                for (int grade = 1; grade <= 13; grade++)
-                    stock.Add(new Card((cardGrade)grade, (cardType)type));
-
+            
             foreach (Player player in players)
                 for (int i = 0; i < 5; i++)
-                    player.TakeCard(stock.Remove());
+                    player.TakeCard(stock.Remove(random.Next(stock.Count)));
             foreach (Player player in players)
                 PullOutGroups(player);
 
         }
+        
 
         public bool PlayOneRound(int selecterdPlayerCard)
         {
@@ -145,9 +145,9 @@ namespace Zadanie_str_390__Go_Fish__
                     description += " karty. " + Environment.NewLine;
             }
             if (stock.Count > 1)
-                description += " W talii zostały " + stock.Count + " karty. ";
+                description += "Ilość pozostałych kart w talii: " + stock.Count;
             else if (stock.Count == 1)
-                description += " W talii została jedna karta.";
+                description += "W talii została jedna karta.";
             else
                 description += "W talii nie ma juz kart.";
             return description;
