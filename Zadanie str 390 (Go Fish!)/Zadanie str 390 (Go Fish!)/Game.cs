@@ -33,7 +33,7 @@ namespace Zadanie_str_390__Go_Fish__
 
         private void Deal()
         {
-            
+
             foreach (Player player in players)
                 for (int i = 0; i < 5; i++)
                     player.TakeCard(stock.Remove(random.Next(stock.Count)));
@@ -41,7 +41,7 @@ namespace Zadanie_str_390__Go_Fish__
                 PullOutGroups(player);
 
         }
-        
+
 
         public bool PlayOneRound(int selecterdPlayerCard)
         {
@@ -53,6 +53,11 @@ namespace Zadanie_str_390__Go_Fish__
                     player.AskForACard(players, 0, stock, cardToAsk);
                 else
                     player.AskForACard(players, playersIndex, stock);
+            }
+
+            foreach (Player player in players)
+            {
+                int playersIndex = players.IndexOf(player);
                 if (PullOutGroups(players[playersIndex]))
                 {
                     textBoxOnForm.Text += "" + players[playersIndex].Name + " dobiera rekę" + Environment.NewLine;
@@ -67,9 +72,11 @@ namespace Zadanie_str_390__Go_Fish__
                 textBoxOnForm.Text += "Koniec kart. Gra Skończona" + Environment.NewLine;
                 return true;
             }
+
             else
                 return false;
         }
+    
         public bool PullOutGroups(Player player)
         {
             IEnumerable<cardGrade> groupsPulled = player.PullOutGroups();
@@ -125,9 +132,9 @@ namespace Zadanie_str_390__Go_Fish__
                 }
             winnerList += " mając " + mostGroups + " grupy";
             if (tie == true)
-                return "Remis, wygrywają ";
+                return "Remis, wygrywają "+winnerList;
             else
-                return "Wygrywa ";
+                return "Wygrywa "+winnerList;
         }
         public IEnumerable<string> GetPlayerCardNames() => players[0].GetCardNames();
 
