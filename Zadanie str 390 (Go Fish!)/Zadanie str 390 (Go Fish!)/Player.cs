@@ -72,21 +72,29 @@ namespace Zadanie_str_390__Go_Fish__
         {
             textBoxOnForm.Text += "" + Name + " pyta czy ktoś ma " + Card.Plural(grade, 2)+Environment.NewLine;
             int totalCardsGiven = 0;
-            for (int playerIndex = players.Count - 1; playerIndex <= 0; playerIndex--)
+            for (int playerIndex = 0; playerIndex < players.Count; playerIndex++)
             {
+                
                 if (playerIndex != myIndex)
                 {
                     Player player = players[playerIndex];
                     Deck cardsToGive = player.DoYouHaveAny(grade);
                     totalCardsGiven += cardsToGive.Count;
+                    while (cardsToGive.Count > 0)
+                        cards.Add(cardsToGive.Remove());
                 }
+                
+
+            }
                 if (totalCardsGiven == 0 && stock.Count > 0)
                 {
                     textBoxOnForm.Text += Name + " musi dobrać kartę " + Environment.NewLine;
                     cards.Add(stock.Remove());
                 }
-            }
+                else
+                textBoxOnForm.Text += Name + " otrzymał kart: " + totalCardsGiven + Environment.NewLine;
         }
+        
 
         public IEnumerable<cardGrade> PullOutGroups()
         {

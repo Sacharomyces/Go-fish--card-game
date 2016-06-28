@@ -12,6 +12,10 @@ namespace Zadanie_str_390__Go_Fish__
         private List<Card> cards;
         private Random random = new Random();
 
+        public void AddRange(IEnumerable<Card> deck)
+        {
+            cards.AddRange(deck);
+        }
         public Deck ()
         {
             cards = new List<Card>();
