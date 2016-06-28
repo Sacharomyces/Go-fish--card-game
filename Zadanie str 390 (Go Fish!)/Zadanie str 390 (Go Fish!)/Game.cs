@@ -67,12 +67,17 @@ namespace Zadanie_str_390__Go_Fish__
                 }
             }
             players[0].SortHand();
-            if (stock.Count == 0)
+            int totalCardsLeft = 0;
+            foreach (Player player in players)
+            {
+                totalCardsLeft += player.CardCount;
+            }
+            if (totalCardsLeft == 0) 
             {
                 textBoxOnForm.Text += "Koniec kart. Gra Skończona" + Environment.NewLine;
                 return true;
             }
-
+            
             else
                 return false;
         }
