@@ -85,12 +85,10 @@ namespace Zadanie_str_390__Go_Fish__
         public string DescribeGroups()
         {
             string describedGroups = "";
-            foreach (Player player in players)
-            {
-
+           
                 foreach (cardGrade grade in groups.Keys)
-                    describedGroups += player.Name + " ma grupę " + Card.Plural(grade, 2) + Environment.NewLine;
-            }
+                    describedGroups += groups[grade].Name + " ma grupę " + Card.Plural(grade, 2) + Environment.NewLine;
+            
             return describedGroups;
 
         }
