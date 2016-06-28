@@ -54,9 +54,10 @@ namespace Zadanie_str_390__Go_Fish__
             }
             if (game.PlayOneRound(listHand.SelectedIndex))
             {
-                textProgress.Text += "Zwycięzcą jest... " + game.GetWinnerName();
+                textProgress.Text += game.GetWinnerName();
                 textGroups.Text = game.DescribeGroups();
                 buttonRequest.Enabled = false;
+                buttonStart.Enabled = true;
             }
             else
                 UpdateForm();
