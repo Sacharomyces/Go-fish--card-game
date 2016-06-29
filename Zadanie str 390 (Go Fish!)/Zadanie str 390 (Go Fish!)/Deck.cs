@@ -24,22 +24,18 @@ namespace Zadanie_str_390__Go_Fish__
         public Deck(CardCompearer comparer)
         {
             cards = new List<Card>();
-
             for (int type = 0; type <= 3; type++)
                 for (int grade = 1; grade <= 13; grade++)
                     cards.Add(new Card((cardGrade)grade, (cardType)type));
 
             cards.Sort(comparer);
         }
-        public Deck(Random random, CardCompearer comparer)
+        public Deck(RandomComparer comparer)
         {
             cards = new List<Card>();
-
-            for (int i = random.Next(1,10); i <= 10; i++)
-            {
-                
-                cards.Add(new Card((cardGrade)random.Next(1, 13), (cardType)random.Next(4)));
-            }
+            for (int type = 0; type <= 3; type++)
+                for (int grade = 1; grade <= 13; grade++)
+                    cards.Add(new Card((cardGrade)grade, (cardType)type));
 
             cards.Sort(comparer);
 

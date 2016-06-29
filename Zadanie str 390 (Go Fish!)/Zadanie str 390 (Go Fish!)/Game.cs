@@ -18,7 +18,7 @@ namespace Zadanie_str_390__Go_Fish__
         public Game(string playerName, IEnumerable<string> opponentNames, TextBox texBoxOnForm)
 
         {
-            CardCompearer comparer = new CardCompearer();
+            RandomComparer comparer = new RandomComparer();
             Random random = new Random();
             this.textBoxOnForm = texBoxOnForm;
             players = new List<Player>();
@@ -67,17 +67,12 @@ namespace Zadanie_str_390__Go_Fish__
                 }
             }
             players[0].SortHand();
-            int totalCardsLeft = 0;
-            foreach (Player player in players)
-            {
-                totalCardsLeft += player.CardCount;
-            }
-            if (totalCardsLeft == 0) 
+            if (stock.Count == 0)
             {
                 textBoxOnForm.Text += "Koniec kart. Gra Skończona" + Environment.NewLine;
                 return true;
             }
-            
+
             else
                 return false;
         }
