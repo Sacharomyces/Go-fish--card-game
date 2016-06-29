@@ -88,7 +88,7 @@ namespace Zadanie_str_390__Go_Fish__
             }
                 if (totalCardsGiven == 0 && stock.Count > 0)
                 {
-                    textBoxOnForm.Text += Name + " musi dobrać kartę " + Environment.NewLine;
+                    textBoxOnForm.Text += Name + " musi dobrać kartę ( idzie na ryby!)" + Environment.NewLine;
                     cards.Add(stock.Remove());
                 }
                 else

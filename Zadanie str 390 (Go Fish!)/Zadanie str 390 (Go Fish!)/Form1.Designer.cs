@@ -71,7 +71,7 @@
             this.textProgress.Multiline = true;
             this.textProgress.Name = "textProgress";
             this.textProgress.ReadOnly = true;
-            this.textProgress.Size = new System.Drawing.Size(211, 263);
+            this.textProgress.Size = new System.Drawing.Size(211, 198);
             this.textProgress.TabIndex = 3;
             // 
             // buttonRequest
@@ -87,11 +87,11 @@
             // 
             // textGroups
             // 
-            this.textGroups.Location = new System.Drawing.Point(30, 375);
+            this.textGroups.Location = new System.Drawing.Point(30, 304);
             this.textGroups.Multiline = true;
             this.textGroups.Name = "textGroups";
             this.textGroups.ReadOnly = true;
-            this.textGroups.Size = new System.Drawing.Size(210, 124);
+            this.textGroups.Size = new System.Drawing.Size(210, 195);
             this.textGroups.TabIndex = 5;
             // 
             // labelName
@@ -115,7 +115,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 359);
+            this.label3.Location = new System.Drawing.Point(32, 288);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 8;
