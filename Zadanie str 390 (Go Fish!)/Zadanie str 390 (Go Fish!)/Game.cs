@@ -148,11 +148,9 @@ namespace Zadanie_str_390__Go_Fish__
             string description = "";
             for (int i = 0; i < players.Count; i++)
             {
-                description += players[i].Name + " ma " + players[i].CardCount;
-                if (players[i].CardCount == 1)
-                    description += " kartę. " + Environment.NewLine;
-                else
-                    description += " karty. " + Environment.NewLine;
+                description += players[i].Name + " ma " + players[i].CardCount + Card.Plural(players[i].CardCount);
+                
+                   
             }
             if (stock.Count > 1)
                 description += "Ilość pozostałych kart w talii: " + stock.Count;

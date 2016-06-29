@@ -8,7 +8,7 @@ namespace Zadanie_str_390__Go_Fish__
 {
     class Card
     {
-        public Card (cardGrade grade,cardType type)
+        public Card(cardGrade grade, cardType type)
         {
             Grade = grade;
             Type = type;
@@ -25,7 +25,7 @@ namespace Zadanie_str_390__Go_Fish__
         {
             get
             {
-                return Grade.ToString() +" "+ Type.ToString();
+                return Grade.ToString() + " " + Type.ToString();
             }
         }
         private static string[] names0 = new string[]
@@ -49,11 +49,17 @@ namespace Zadanie_str_390__Go_Fish__
 
         }
 
-
-
-
+        public static string Plural(int count)
+        {
+            if (count == 1)
+                return " kartę\r\n";
+            if (count >= 2 && count <= 4)
+                return " karty\r\n";
+            else
+                return " kart\r\n";
         }
     }
+}
    enum cardGrade
     {
         Dwójka = 1,Trójka,Czwórka,Piątka,Szóstka,Siódemka,Ósemka,Dziewiątka,Dziesiątka,Walet,Dama,Król,As
