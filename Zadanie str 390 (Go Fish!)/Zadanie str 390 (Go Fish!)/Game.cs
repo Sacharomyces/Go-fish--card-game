@@ -63,7 +63,6 @@ namespace Zadanie_str_390__Go_Fish__
                     textBoxOnForm.Text += "" + players[playersIndex].Name + " dobiera rekę" + Environment.NewLine;
                     for (int i = 0; i < 4 && stock.Count > 0; i++)
                         players[playersIndex].TakeCard(stock.Remove());
-
                 }
             }
             players[0].SortHand();
